@@ -6,8 +6,8 @@ dotenv.config();
 const AppDataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL,
-  entities: ['src/**/*.entity.js'],
-  migrations: ['/src/migrations/*.ta'],
+  entities: ['src/**/*.entity.ts'],
+  migrations: ['/src/migrations/*.ts'],
   synchronize: false,
   migrationsTableName: 'migration',
   extra: {
