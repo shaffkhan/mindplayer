@@ -13,7 +13,6 @@ import AppDataSource from 'ormconfig';
   imports: [
     TypeOrmModule.forRoot(AppDataSource.options),
     TypeOrmModule.forFeature([User]),  // Add this line to import the User entity
-
     UserModule,
     AuthModule,
     CustomConfigModule

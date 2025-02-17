@@ -1,34 +1,30 @@
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode, HttpStatus, Get, Request, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { SigninDto } from './dto/signin.sto';
-import { ForgotPasswordDto } from './dto/forgot-password.dto';
 
-@ApiTags('auth')
+import { CreateAccountDto } from './dto/create-auth.dto';
+import { LoginDto } from './dto/signin.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+
+@ApiTags('User Account')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('signup')
-  @ApiResponse({ status: 201, description: 'User created successfully' })
+  @ApiResponse({ status: 201, description: 'Account created successfully. Please verify your email.' })
   @ApiResponse({ status: 400, description: 'Bad request' })
-  async signup(@Body() createUserDto: CreateAuthDto) {
-    return this.authService.signup(createUserDto);
+  async signup(@Body() createAccountDto: CreateAccountDto) {
+    return this.authService.signup(createAccountDto);
   }
 
-  @Post('signin')
+  @Post('login')
   @HttpCode(HttpStatus.OK)
   @ApiResponse({ status: 200, description: 'Login successful' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async signin(@Body() credentials: SigninDto) {
-    return this.authService.signin(credentials.email, credentials.password);
+  async login(@Body() loginDto: LoginDto) {
+    return this.authService.login(loginDto.email, loginDto.password);
   }
 
-  @Post('forgot-password')
-  @ApiResponse({ status: 200, description: 'Password reset link sent to your email' })
-  @ApiResponse({ status: 404, description: 'User not found' })
-  async forgotPassword(@Body() body: ForgotPasswordDto) {
-    return this.authService.forgotPassword(body.email);
-  }
+
 }

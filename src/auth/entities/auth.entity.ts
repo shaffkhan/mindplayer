@@ -1,5 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert } from 'typeorm';
-import { Exclude } from 'class-transformer';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  BeforeInsert,
+} from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 @Entity('users')
@@ -8,14 +14,22 @@ export class User {
   id: string;
 
   @Column()
-  name: string;
+  first_name: string;
+
+  @Column()
+  last_name: string;
 
   @Column({ unique: true })
   email: string;
 
-  @Column()
-  @Exclude()
+  @Column({select:false})
   password: string;
+
+  @Column({ default: 'male' })
+  gender: string;
+
+  @Column({ type: 'date', default: () => "'2000-01-01'" })
+  dob: string;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -28,7 +42,7 @@ export class User {
     this.password = await bcrypt.hash(this.password, 10);
   }
 
-  async validatePassword(password: string): Promise<boolean> {
-    return bcrypt.compare(password, this.password);
+  async validatePassword(plainPassword: string): Promise<boolean> {
+    return bcrypt.compare(plainPassword, this.password);
   }
 }
