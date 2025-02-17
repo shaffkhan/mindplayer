@@ -46,12 +46,12 @@ export class AuthService {
     const token = this.jwtService.sign(payload);
 
     return {
-      first_name: user.first_name,
-      last_name: user.last_name,
-      email: user.email,
-      gender: user.gender,
-      dob: user.dob,
-      token,
+      first_name: user.first_name || '',
+      last_name: user.last_name|| '',
+      email: user.email|| '',
+      gender: user.gender|| '',
+      dob: user.dob|| '',
+      token:token|| '',
     };
   }
  
