@@ -8,11 +8,11 @@ import {
   OneToOne,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { UserPreference } from '../../preferences/entities/preference.entity';
+import { UserPreference } from 'src/preferences/entities/preference.entity';
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
