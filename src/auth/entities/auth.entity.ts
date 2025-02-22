@@ -8,7 +8,7 @@ import {
   OneToOne,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { UserPreference } from 'src/preferences/entities/preference.entity';
+import { UserPreference } from '../../preferences/entities/preference.entity';
 
 @Entity('User')
 export class User {
