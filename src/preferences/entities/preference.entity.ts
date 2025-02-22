@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'ty
 
 @Entity('user_preferences')
 export class UserPreference {
-  @PrimaryGeneratedColumn('uuid')
+  @Column()
   id: string;
 
   @OneToOne(() => User, { onDelete: 'CASCADE' })
