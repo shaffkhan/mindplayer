@@ -8,6 +8,7 @@ import {
   OneToOne,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+// Use a relative path instead of an absolute one:
 import { UserPreference } from '../../preferences/entities/preference.entity';
 
 @Entity('User')
@@ -24,19 +25,15 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  // Exclude password from default queries
   @Column({ select: false })
   password: string;
 
-  // Email verification flag
   @Column({ default: false })
   emailVerified: boolean;
 
-  // OTP for email verification; allow null
   @Column({ type: 'integer', nullable: true })
   emailOtp: number | null;
 
-  // OTP for password reset; allow null
   @Column({ type: 'integer', nullable: true })
   resetOtp: number | null;
 
@@ -52,7 +49,6 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  // One-to-one relation with user preferences
   @OneToOne(() => UserPreference, (preference) => preference.user, { cascade: true, eager: true })
   preferences: UserPreference;
 
