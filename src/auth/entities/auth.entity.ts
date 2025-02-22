@@ -10,9 +10,9 @@ import {
 import * as bcrypt from 'bcrypt';
 import { UserPreference } from 'src/preferences/entities/preference.entity';
 
-@Entity('users')
+@Entity('User')
 export class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column()
