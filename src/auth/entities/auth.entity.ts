@@ -12,7 +12,7 @@ import { UserPreference } from 'src/preferences/entities/preference.entity';
 
 @Entity('users')
 export class User {
-  @Column()
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column()
