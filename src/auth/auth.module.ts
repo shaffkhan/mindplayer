@@ -6,10 +6,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './strategies/jwt-strategy';
 import { User } from './entities/auth.entity';
+import { UserPreference } from 'src/preferences/entities/preference.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User,UserPreference]),
     ConfigModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
