@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './users/users.module';
 import { CustomConfigModule } from './config/config.module';
 import { User } from './auth/entities/auth.entity';
+import { PreferencesModule } from './preferences/preferences.module';
 import AppDataSource from 'ormconfig';
 
 @Module({
@@ -15,7 +16,8 @@ import AppDataSource from 'ormconfig';
     TypeOrmModule.forFeature([User]),  // Add this line to import the User entity
     UserModule,
     AuthModule,
-    CustomConfigModule
+    CustomConfigModule,
+    PreferencesModule
   ],
   controllers: [AppController],
   providers: [AppService],
